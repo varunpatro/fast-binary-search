@@ -3,7 +3,11 @@
 This project will explore different techniques to make binary search run fast. 
 
 Some approaches (will be benchmarked)
+
 [ ] Naive 
+
 [ ] Conditional Move
+
 [ ] Branchless
+
 [ ] Heapified
