@@ -2,7 +2,7 @@
 #include "data.h"
 
 int naive_search(float target) {
-  int low = 0, high = NUM_FLOATS; // N is the size of the array
+  int low = 0, high = NUM_FLOATS; // NUM_FLOATS is the size of the array
   while (low != high) {
     int mid = low + (high - low) / 2;
     if (arr[mid] <= target) {
