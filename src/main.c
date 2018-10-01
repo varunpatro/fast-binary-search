@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <sys/time.h>
-#include "naive.h"
+#include "../include/naive.h"
 
 int main() {
 
