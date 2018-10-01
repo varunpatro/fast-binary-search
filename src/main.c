@@ -2,6 +2,7 @@
 #include <stdlib.h>
 #include <sys/time.h>
 #include "../include/naive.h"
+#include "../include/branchless.h"
 
 int main() {
 
@@ -11,7 +12,7 @@ int main() {
   int count = 0;
   for (int i = 0; i < NUM_SEARCHES; i++) {
     float random_float = (float) rand() / (float) (RAND_MAX / 10000);
-    count += search(random_float);
+    count += naive_search(random_float);
   }
 
   gettimeofday(&tval_after, NULL);

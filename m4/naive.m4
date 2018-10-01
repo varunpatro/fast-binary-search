@@ -1,7 +1,7 @@
 #pragma once
 #include "data.h"
 
-int search(float target) {
+int naive_search(float target) {
   int low = 0, high = NUM_FLOATS; // N is the size of the array
   while (low != high) {
     int mid = low + (high - low) / 2;
