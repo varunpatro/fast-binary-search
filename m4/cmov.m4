@@ -7,8 +7,7 @@ int cmov_search(float target) {
 
   while ((half = n / 2) > 0) {
     mid = low + half;
-    int val = arr[mid];
-    low = (val < target) ? mid : low;
+    low = (arr[mid] < target) ? mid : low;
     n -= half;
   }
 
