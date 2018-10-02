@@ -22,7 +22,7 @@ $ make; make bench
 
 ** to test
 
-+BEGIN_SRC sh
+#+BEGIN_SRC sh
 $ make; make test
 #+END_SRC
 
