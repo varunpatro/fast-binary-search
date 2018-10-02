@@ -16,8 +16,13 @@ Some approaches (will be benchmarked)
 
 ** to benchmark
 
-> $ make; make bench;
+#+BEGIN_SRC sh
+$ make; make bench
+#+END_SRC
 
 ** to test
 
-> $ make; make test;
++BEGIN_SRC sh
+$ make; make test
+#+END_SRC
+
