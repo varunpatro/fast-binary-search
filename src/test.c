@@ -12,12 +12,12 @@ int main() {
     int branchless = branchless_search(random_float);
     int cmov = cmov_search(random_float);
     if (naive != branchless) {
-      printf("rand_float = %f, naive = %d, branchless = %d\n", random_float, naive, branchless);
+      printf("i = %d, rand_float = %f, naive = %d, branchless = %d\n", i, random_float, naive, branchless);
       return 1;
     }
 
     if (naive != cmov) {
-      printf("rand_float = %f, naive = %d, cmov = %d\n", random_float, naive, cmov);
+      printf("i = %d, rand_float = %f, naive = %d, cmov = %d\n", i, random_float, naive, cmov);
       return 1;
     }
   }
