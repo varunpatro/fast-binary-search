@@ -1,13 +1,19 @@
-all: build/main.exe
+all: build/bench.exe ./build/test.exe
 
 test:
-	./build/main.exe
+	./build/test.exe
+
+bench:
+	./build/bench.exe
 
 clean:
 	rm -rf ./build ./include
 
-build/main.exe: src/main.c include/data.h include/naive.h include/branchless.h
-	gcc src/main.c -o ./build/main.exe
+build/bench.exe: src/bench.c include/data.h include/naive.h include/branchless.h include/cmov.h
+	gcc -O3 src/bench.c -o ./build/bench.exe
+
+build/test.exe: src/test.c include/data.h include/naive.h include/branchless.h include/cmov.h
+	gcc src/test.c -o ./build/test.exe
 
 build/gen_random_floats.exe: src/gen_random_floats.c
 	mkdir -p build;
@@ -15,6 +21,9 @@ build/gen_random_floats.exe: src/gen_random_floats.c
 
 include/naive.h: m4/naive.m4
 	cd m4; m4 naive.m4 > ../include/naive.h
+
+include/cmov.h: m4/common.m4 m4/cmov.m4
+	cd m4; m4 cmov.m4 > ../include/cmov.h
 
 include/branchless.h: m4/common.m4 m4/branchless.m4
 	cd m4; m4 branchless.m4 > ../include/branchless.h

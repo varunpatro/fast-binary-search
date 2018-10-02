@@ -4,10 +4,20 @@ This project will explore different techniques to make binary search run fast.
 
 Some approaches (will be benchmarked)
 
-[ ] Naive 
+[x] Naive
 
 [ ] Conditional Move
 
-[ ] Branchless
+[ ] Code Generation
+
+[x] Branchless
 
 [ ] Heapified
+
+** to benchmark
+
+> $ make; make bench;
+
+** to test
+
+> $ make; make test;

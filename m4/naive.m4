@@ -2,10 +2,10 @@
 #include "data.h"
 
 int naive_search(float target) {
-  int low = 0, high = NUM_FLOATS; // N is the size of the array
-  while (low != high) {
+  int low = 0, high = NUM_FLOATS - 1; // NUM_FLOATS is the size of the array
+  while (low < high) {
     int mid = low + (high - low) / 2;
-    if (arr[mid] <= target) {
+    if (arr[mid] < target) {
       /* This index, and everything below it, must not be the first element
        * greater than what we're looking for because this element is no greater
        * than the element.
