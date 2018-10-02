@@ -17,8 +17,8 @@ int main() {
     }
 
     if (naive != cmov) {
-      // printf("i = %d, rand_float = %f, naive = %d, cmov = %d\n", i, random_float, naive, cmov);
-      // return 1;
+      printf("i = %d, rand_float = %f, naive = %d, cmov = %d\n", i, random_float, naive, cmov);
+      return 1;
     }
   }
 
