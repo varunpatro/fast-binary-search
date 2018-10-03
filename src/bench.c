@@ -5,12 +5,13 @@
 #include "../include/naive_alt.h"
 #include "../include/cmov.h"
 #include "../include/branchless.h"
+#include "../include/code_gen.h"
 
 
 int main() {
   int count = 0;
   struct timeval tval_start, tval_result;
-  struct timeval naive_after, naive_alt_after, branchless_after, cmov_after;
+  struct timeval naive_after, naive_alt_after, cmov_after, branchless_after, code_gen_after;
   gettimeofday(&tval_start, NULL);
 
   for (int i = 0; i < NUM_SEARCHES; i++) {
@@ -37,6 +38,12 @@ int main() {
   }
   gettimeofday(&branchless_after, NULL);
 
+  for (int i = 0; i < NUM_SEARCHES; i++) {
+    float random_float = (float) rand() / (float) (RAND_MAX / 10000);
+    count += code_gen_search(random_float);
+  }
+  gettimeofday(&code_gen_after, NULL);
+
 
   // PRINTING RESULTS
   printf("number_of_floats = %d\n", NUM_FLOATS);
@@ -53,7 +60,8 @@ int main() {
   timersub(&branchless_after, &cmov_after, &tval_result);
   printf("branchless_elapsed = %ld.%06ld\n", (long int)tval_result.tv_sec, (long int)tval_result.tv_usec);
 
-
+  timersub(&code_gen_after, &branchless_after, &tval_result);
+  printf("code_gen_elapsed = %ld.%06ld\n", (long int)tval_result.tv_sec, (long int)tval_result.tv_usec);
 
   printf("count = %d\n", count);
 }
