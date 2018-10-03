@@ -9,10 +9,10 @@ bench:
 clean:
 	rm -rf ./build ./include
 
-build/bench.exe: src/bench.c include/data.h include/naive.h include/naive_alt.h include/cmov.h include/branchless.h include/code_gen.h
+build/bench.exe: src/bench.c include/data.h include/naive.h include/naive_alt.h include/cmov.h include/branchless.h include/code_gen.h include/code_gen_ternary.h
 	gcc -g -O3 src/bench.c -o ./build/bench.exe
 
-build/test.exe: src/test.c include/data.h include/naive.h include/naive_alt.h include/cmov.h include/branchless.h include/code_gen.h
+build/test.exe: src/test.c include/data.h include/naive.h include/naive_alt.h include/cmov.h include/branchless.h include/code_gen.h include/code_gen_ternary.h
 	gcc src/test.c -o ./build/test.exe
 
 build/gen_random_floats.exe: src/gen_random_floats.c
@@ -30,6 +30,9 @@ include/cmov.h: m4/common.m4 m4/cmov.m4
 
 include/code_gen.h: m4/common.m4 m4/code_gen.m4
 	cd m4; m4 code_gen.m4 > ../include/code_gen.h
+
+include/code_gen_ternary.h: m4/common.m4 m4/code_gen_ternary.m4
+	cd m4; m4 code_gen_ternary.m4 > ../include/code_gen_ternary.h
 
 include/branchless.h: m4/common.m4 m4/branchless.m4
 	cd m4; m4 branchless.m4 > ../include/branchless.h

@@ -6,6 +6,7 @@
 #include "../include/branchless.h"
 #include "../include/cmov.h"
 #include "../include/code_gen.h"
+#include "../include/code_gen_ternary.h"
 
 int main() {
   for (int i = 0; i < NUM_SEARCHES; i++) {
@@ -15,6 +16,7 @@ int main() {
     int cmov = cmov_search(random_float);
     int branchless = branchless_search(random_float);
     int code_gen = code_gen_search(random_float);
+    int code_gen_ternary = code_gen_ternary_search(random_float);
 
     if (naive != naive_alt) {
       printf("i = %d, rand_float = %f, naive = %f, naive_alt = %f\n", i, random_float, arr[naive], arr[naive_alt]);
@@ -35,6 +37,12 @@ int main() {
       printf("i = %d, rand_float = %f, naive = %f, code_gen = %f\n", i, random_float, arr[naive], arr[code_gen]);
       return 1;
     }
+
+    if (naive != code_gen_ternary) {
+      printf("i = %d, rand_float = %f, naive = %f, code_gen_ternary = %f\n", i, random_float, arr[naive], arr[code_gen_ternary]);
+      return 1;
+    }
+
 
   }
 
