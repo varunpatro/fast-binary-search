@@ -1,8 +1,11 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-int cmp_float (const void * a, const void * b) {
-  return ( *(float*)a - *(float*)b );
+int cmp_float(const void * elem1, const void * elem2) {
+  if(*(float*)elem1 < *(float*)elem2) {
+    return -1;
+  }
+  return *(float*)elem1 > *(float*)elem2;
 }
 
 int main(int argc, char** argv) {
