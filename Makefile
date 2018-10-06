@@ -1,3 +1,4 @@
+CC = gcc
 all: build/bench.exe ./build/test.exe
 
 test:
@@ -10,14 +11,14 @@ clean:
 	rm -rf ./build ./include
 
 build/bench.exe: src/bench.c include/data.h include/naive.h include/naive_alt.h include/cmov.h include/branchless.h include/code_gen.h include/code_gen_ternary.h include/heap.h
-	gcc -g -O3 src/bench.c -o ./build/bench.exe
+	$(CC) -g -O3 src/bench.c -o ./build/bench.exe
 
 build/test.exe: src/test.c include/data.h include/naive.h include/naive_alt.h include/cmov.h include/branchless.h include/code_gen.h include/code_gen_ternary.h include/heap.h
-	gcc src/test.c -o ./build/test.exe
+	$(CC) src/test.c -o ./build/test.exe
 
 build/gen_random_floats.exe: src/gen_random_floats.c
 	mkdir -p build;
-	gcc src/gen_random_floats.c -o ./build/gen_random_floats.exe
+	$(CC) src/gen_random_floats.c -o ./build/gen_random_floats.exe
 
 include/data.h: build/gen_random_floats.exe m4/common.m4 m4/data.m4
 	mkdir -p include;
@@ -42,7 +43,7 @@ include/branchless.h: m4/common.m4 m4/branchless.m4
 	cd m4; m4 branchless.m4 > ../include/branchless.h
 
 build/gen_heap.exe: include/data.h src/gen_heap.c
-	gcc src/gen_heap.c -o ./build/gen_heap.exe
+	$(CC) src/gen_heap.c -o ./build/gen_heap.exe
 
 include/heap_data.h: build/gen_heap.exe m4/common.m4 m4/heap_data.m4
 	cd m4; m4 heap_data.m4 > ../include/heap_data.h
