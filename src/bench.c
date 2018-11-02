@@ -8,6 +8,7 @@
 #include "../include/code_gen.h"
 #include "../include/code_gen_ternary.h"
 #include "../include/heap.h"
+#include "../include/cache_heap.h"
 
 
 int main() {
@@ -15,7 +16,7 @@ int main() {
   struct timeval tval_start, tval_result;
   struct timeval naive_after, naive_alt_after, cmov_after,
     branchless_after, code_gen_after, code_gen_ternary_after,
-    heap_after;
+    heap_after, cache_heap_after;
   gettimeofday(&tval_start, NULL);
 
   for (int i = 0; i < NUM_SEARCHES; i++) {
@@ -60,6 +61,12 @@ int main() {
   }
   gettimeofday(&heap_after, NULL);
 
+  for (int i = 0; i < NUM_SEARCHES; i++) {
+    float random_float = (float) rand() / (float) (RAND_MAX / 10000);
+    count += cache_heap_search(random_float);
+  }
+  gettimeofday(&cache_heap_after, NULL);
+
   // PRINTING RESULTS
   printf("number_of_floats = %d\n", NUM_FLOATS);
   printf("number_of_searches = %d\n", NUM_SEARCHES);
@@ -83,6 +90,9 @@ int main() {
 
   timersub(&heap_after, &code_gen_ternary_after, &tval_result);
   printf("heap_elapsed = %ld.%06ld\n", (long int)tval_result.tv_sec, (long int)tval_result.tv_usec);
+
+  timersub(&cache_heap_after, &heap_after, &tval_result);
+  printf("cache_heap_elapsed = %ld.%06ld\n", (long int)tval_result.tv_sec, (long int)tval_result.tv_usec);
 
   printf("count = %d\n", count);
 }

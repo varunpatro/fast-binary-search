@@ -1,19 +1,21 @@
 CC = gcc
+CXX = g++
+
 all: build/bench.exe ./build/test.exe
 
 test:
 	./build/test.exe
 
 bench:
-	./build/bench.exe
+	./build/bench.exe | column -t
 
 clean:
 	rm -rf ./build ./include
 
-build/bench.exe: src/bench.c include/data.h include/naive.h include/naive_alt.h include/cmov.h include/branchless.h include/code_gen.h include/code_gen_ternary.h include/heap.h
+build/bench.exe: src/bench.c include/data.h include/naive.h include/naive_alt.h include/cmov.h include/branchless.h include/code_gen.h include/code_gen_ternary.h include/heap.h include/cache_heap.h
 	$(CC) -g -O3 src/bench.c -o ./build/bench.exe
 
-build/test.exe: src/test.c include/data.h include/naive.h include/naive_alt.h include/cmov.h include/branchless.h include/code_gen.h include/code_gen_ternary.h include/heap.h
+build/test.exe: src/test.c include/data.h include/naive.h include/naive_alt.h include/cmov.h include/branchless.h include/code_gen.h include/code_gen_ternary.h include/heap.h include/cache_heap.h
 	$(CC) src/test.c -o ./build/test.exe
 
 build/gen_random_floats.exe: src/gen_random_floats.c
@@ -50,3 +52,12 @@ include/heap_data.h: build/gen_heap.exe m4/common.m4 m4/heap_data.m4
 
 include/heap.h: include/heap_data.h m4/heap.m4
 	cd m4; m4 heap.m4 > ../include/heap.h
+
+build/gen_cache_heap.exe: include/heap_data.h src/gen_cache_heap.cpp
+	$(CXX) src/gen_cache_heap.cpp -o ./build/gen_cache_heap.exe
+
+include/cache_heap_data.h: build/gen_cache_heap.exe m4/common.m4 m4/cache_heap_data.m4
+	cd m4; m4 cache_heap_data.m4 > ../include/cache_heap_data.h
+
+include/cache_heap.h: include/cache_heap_data.h m4/cache_heap.m4
+	cd m4; m4 cache_heap.m4 > ../include/cache_heap.h

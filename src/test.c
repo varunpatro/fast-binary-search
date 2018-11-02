@@ -8,6 +8,7 @@
 #include "../include/code_gen.h"
 #include "../include/code_gen_ternary.h"
 #include "../include/heap.h"
+#include "../include/cache_heap.h"
 
 int main() {
   for (int i = 0; i < NUM_SEARCHES; i++) {
@@ -19,6 +20,7 @@ int main() {
     int code_gen = code_gen_search(random_float);
     int code_gen_ternary = code_gen_ternary_search(random_float);
     int heap = heap_search(random_float);
+    int cache_heap = cache_heap_search(random_float);
 
     if (naive != naive_alt) {
       printf("i = %d, rand_float = %f, naive = %f, naive_alt = %f\n", i, random_float, arr[naive], arr[naive_alt]);
@@ -47,6 +49,11 @@ int main() {
 
     if (arr[naive] != heap_arr[heap]) {
       //      printf("i = %d, rand_float = %f, naive = %f, heap = %f\n", i, random_float, arr[naive], heap_arr[heap]);
+      //      return 1;
+    }
+
+    if (arr[naive] != cache_heap_arr[cache_heap]) {
+      //      printf("i = %d, rand_float = %f, naive = %f, cache_heap = %f\n", i, random_float, arr[naive], cache_heap_arr[heap]);
       //      return 1;
     }
 
